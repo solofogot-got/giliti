@@ -5,6 +5,7 @@ RUN npm install --ignore-scripts
 
 FROM node:20-alpine AS builder
 WORKDIR /app
+RUN apk add --no-cache openssl1.1-compat
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
@@ -17,6 +18,7 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV HOSTNAME=0.0.0.0
 ENV PORT=3000
+RUN apk add --no-cache openssl1.1-compat
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
