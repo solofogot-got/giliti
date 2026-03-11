@@ -1,12 +1,12 @@
 server {
-    listen 80;
-    server_name giliti.ru www.giliti.ru localhost;
+    listen 443 ssl http2;
+    server_name giliti.ru www.giliti.ru;
+    ssl_certificate /etc/letsencrypt/live/giliti.ru/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/giliti.ru/privkey.pem;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header X-Content-Type-Options "nosniff" always;
     client_max_body_size 10M;
-
-    location /.well-known/acme-challenge/ {
-        root /var/www/certbot;
-        allow all;
-    }
 
     location / {
         proxy_pass http://app:3000;
