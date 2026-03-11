@@ -40,6 +40,34 @@
 
 ---
 
+## Деплой на сервер
+
+**Первый раз на сервере** (клонирование и запуск):
+
+```bash
+cd /opt
+sudo git clone https://github.com/solofogot-got/giliti.git
+cd giliti
+cp .env.example .env
+# Отредактировать .env: DOMAIN_NAME, CERTBOT_EMAIL, POSTGRES_PASSWORD, NEXTAUTH_SECRET, TELEGRAM_BOT_TOKEN
+docker compose up -d
+docker compose exec app npx prisma db seed
+```
+
+**Обновление после изменений в коде** (одна команда):
+
+```bash
+cd /opt/giliti && git pull origin main && docker compose build app && docker compose up -d
+```
+
+Или через скрипт:
+
+```bash
+cd /opt/giliti && chmod +x deploy.sh && ./deploy.sh
+```
+
+---
+
 ## Деплой (Docker)
 
 В корне проекта должен быть файл `.env` с переменными (см. `.env.example`).
@@ -73,7 +101,7 @@
 
 1. **Установите Git**, если ещё не установлен: [git-scm.com](https://git-scm.com/).
 
-2. **Создайте репозиторий** на GitHub (например, `giliti`) у аккаунта `solofogot`. Не добавляйте README, .gitignore и лицензию — они уже есть в проекте.
+2. **Создайте репозиторий** на GitHub (например, `giliti`) у аккаунта (например, solofogot-got). Не добавляйте README, .gitignore и лицензию — они уже есть в проекте.
 
 3. **В корне проекта** выполните в терминале:
 
@@ -82,7 +110,7 @@ git init
 git add .
 git commit -m "Initial commit: Giliti app, admin, AI providers, seed"
 git branch -M main
-git remote add origin https://github.com/solofogot/giliti.git
+git remote add origin https://github.com/solofogot-got/giliti.git
 git push -u origin main
 ```
 
