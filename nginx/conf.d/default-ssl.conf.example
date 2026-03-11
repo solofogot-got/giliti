@@ -1,0 +1,22 @@
+# HTTPS — раскомментируйте и переименуйте в default-ssl.conf после получения сертификатов.
+# Скопируйте в default.conf поверх HTTP-блока или добавьте этот server рядом.
+#
+# server {
+#     listen 443 ssl http2;
+#     server_name giliti.ru www.giliti.ru;
+#     ssl_certificate /etc/letsencrypt/live/giliti.ru/fullchain.pem;
+#     ssl_certificate_key /etc/letsencrypt/live/giliti.ru/privkey.pem;
+#     add_header Strict-Transport-Security "max-age=31536000" always;
+#     add_header X-Frame-Options "SAMEORIGIN" always;
+#     add_header X-Content-Type-Options "nosniff" always;
+#     client_max_body_size 10M;
+#
+#     location / {
+#         proxy_pass http://app:3000;
+#         proxy_http_version 1.1;
+#         proxy_set_header Host $host;
+#         proxy_set_header X-Real-IP $remote_addr;
+#         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#         proxy_set_header X-Forwarded-Proto $scheme;
+#     }
+# }
